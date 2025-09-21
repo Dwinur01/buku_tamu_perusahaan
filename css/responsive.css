@@ -1,0 +1,121 @@
+/* ======================================================= */
+/* ==          FILE CSS KHUSUS UNTUK RESPONSIVE         == */
+/* ======================================================= */
+
+/* --- Gaya Awal untuk Tombol Menu (Disembunyikan di Desktop) --- */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--primary-text);
+    z-index: 1201; 
+}
+.menu-toggle svg { width: 28px; height: 28px; }
+
+/* --- Tablet (Potret) --- */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 72px;
+        padding: 24px 10px;
+    }
+    .sidebar .logo span, .sidebar-nav a span { display: none; }
+    .sidebar .logo, .sidebar-nav a { justify-content: center; }
+    .main-wrapper {
+        margin-left: 72px;
+        width: calc(100% - 72px);
+    }
+    /* [FIX] Tata letak dashboard di tablet */
+    .charts-grid, .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Ponsel (Lanskap & Potret) --- */
+@media (max-width: 768px) {
+    /* [FIX] Ukuran font dasar untuk mobile */
+    html {
+        font-size: 15px;
+    }
+    
+    .top-header {
+        position: sticky;
+        top: 0;
+        z-index: 1200;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+    }
+    .menu-toggle { display: block; order: -1; }
+    .top-header h1 { flex-grow: 1; margin-left: 15px; font-size: 1.25rem; }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 260px;
+        z-index: 1300;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        padding: 24px;
+    }
+    .sidebar.show { transform: translateX(0); }
+    .sidebar .logo span, .sidebar-nav a span { display: inline; }
+    .sidebar .logo, .sidebar-nav a { justify-content: flex-start; }
+
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+    .main-content {
+        padding: 1rem;
+    }
+
+    /* [FIX] Filter bar di "Daftar Tamu" */
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch; /* Tombol export memenuhi lebar */
+    }
+    .filter-bar {
+        flex-direction: column;
+    }
+    .filter-bar input, .filter-bar select, .filter-bar button {
+        width: 100%;
+    }
+
+    /* [FIX] Tata letak kartu entri tamu di ponsel */
+    .entry-header, .entry-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .entry-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* --- Ponsel Kecil --- */
+@media (max-width: 480px) {
+    .user-profile { gap: 8px; }
+    .user-details { display: none; }
+    .top-header h1 { margin-left: 10px; }
+
+    /* [FIX] Ukuran tombol lebih kecil di ponsel */
+    .btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    .btn i {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Padding kartu lebih kecil */
+    .card, .form-card, .schedule-container, .notifications-panel, .chart-container {
+        padding: 1rem;
+    }
+}

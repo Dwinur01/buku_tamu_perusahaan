@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Variabel Warna dari style.css untuk Sidebar --- */
+:root {
+    /* Variabel dari style.css untuk tema utama (kuning) */
+    --primary-color: #ffdc69; 
+    --primary-dark-color: #f0b400;
+    --sidebar-text-color: #333; 
+    --background-color: #f4f7f9;
+    --border-color-main: #eee;
+    --shadow-light-main: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    /* Variabel asli dari dashboard_style.css untuk konten */
+    --main-bg: #f7fafc;
+    --card-bg: #ffffff;
+    --primary-text: #2d3748;
+    --secondary-text: #718096;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    background-color: var(--main-bg); /* Latar belakang konten tetap dari dasbor */
+    color: var(--primary-text);
+}
+
+/* --- Sidebar --- */
+/* GAYA INI DIAMBIL DARI STYLE.CSS UNTUK KONSISTENSI */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color); /* Warna kuning-emas */
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px; /* Sedikit disesuaikan */
+    color: var(--sidebar-text-color); /* Warna teks gelap */
+    text-decoration: none;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 8px;
+}
+
+.sidebar-nav {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Menjaga tombol logout di bawah */
+}
+
+.sidebar-nav a {
+    display: flex; /* Menggunakan flex untuk ikon dan teks */
+    align-items: center;
+    gap: 12px;
+    color: var(--sidebar-text-color); /* Warna teks gelap */
+    text-decoration: none;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: #fff; /* Latar putih saat aktif/hover */
+    color: #b8860b; /* Warna emas gelap untuk teks */
+}
+
+.sidebar i {
+    width: 20px;
+    height: 20px;
+}
+/* --- AKHIR DARI GAYA SIDEBAR --- */
+
+
+/* --- Main Wrapper & Content (Gaya asli dipertahankan) --- */
+.main-wrapper {
+    margin-left: 250px; /* Disesuaikan dengan lebar sidebar baru */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-header {
+    background-color: var(--card-bg);
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: #3182ce;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-details {
+    text-align: right;
+}
+
+.user-name {
+    font-weight: 600;
+    display: block;
+}
+
+.realtime-clock {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+
+.user-icon-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #e2e8f0;
+    border-radius: 50%;
+}
+
+.main-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.stats-grid, .charts-grid, .bottom-grid {
+    display: grid;
+    gap: 32px;
+}
+
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.charts-grid {
+    grid-template-columns: 2fr 1fr;
+}
+
+.bottom-grid {
+    grid-template-columns: 2.5fr 1fr;
+}
+
+.stat-card, .chart-container, .table-container, .notifications-panel {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content p {
+    color: var(--secondary-text);
+    margin-bottom: 4px;
+}
+
+.card-content h3 {
+    font-size: 28px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-filter .filter-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    background: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.chart-filter .filter-btn.active {
+    background-color: #edf2f7;
+    font-weight: 500;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.table-tools input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.guest-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.guest-table th, .guest-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guest-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--secondary-text);
+}
+
+.notification-list {
+    list-style: none;
+}
+
+.notification-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.notification-list li:last-child {
+    border-bottom: none;
+}
+
+.notification-list p {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.notification-list span {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+
+@media (max-width: 1200px) {
+    .charts-grid, .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+    .main-wrapper {
+        margin-left: 0;
+    }
+    .top-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+}
