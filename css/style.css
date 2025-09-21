@@ -1,0 +1,501 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variabel Warna Global */
+:root {
+    --sidebar-bg: #ffdc69;
+    --sidebar-text-color: #333;
+    --sidebar-active-bg: #ffffff;
+    --sidebar-active-text: #b8860b;
+    --main-bg: #f4f7f9;
+    --card-bg: #ffffff;
+    --primary-text: #2d3748;
+    --secondary-text: #718096;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --primary-accent: #3182ce;
+    --primary-accent-hover: #2b6cb0;
+    --secondary-accent: #e2e8f0;
+    --secondary-accent-hover: #cbd5e0;
+    --danger-accent: #e53e3e;
+    --danger-accent-hover: #c53030;
+    --success-accent: #28a745;
+    --success-accent-hover: #218838;
+    --transition-speed: 0.3s;
+}
+
+/* Reset & Gaya Dasar Body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    background-color: var(--main-bg);
+    color: var(--primary-text);
+    min-height: 100vh;
+    font-size: 0.95rem;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text-color);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    height: 100vh;
+    position: fixed;
+    flex-shrink: 0;
+    transition: width var(--transition-speed) ease;
+    z-index: 1100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--sidebar-text-color);
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 12px;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all var(--transition-speed);
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--sidebar-active-bg);
+    color: var(--sidebar-active-text);
+    transform: translateX(5px);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--sidebar-active-bg);
+    color: var(--sidebar-active-text);
+    font-weight: 600;
+}
+
+.sidebar i {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Main Wrapper & Header --- */
+.main-wrapper {
+    margin-left: 260px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 260px);
+    transition: margin-left var(--transition-speed) ease;
+}
+
+.top-header {
+    background-color: var(--card-bg);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-details {
+    text-align: right;
+}
+
+.user-name {
+    display: block;
+    font-weight: 600;
+}
+
+.realtime-clock {
+    font-size: 0.75rem;
+    color: var(--secondary-text);
+}
+
+.user-icon-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: var(--secondary-text);
+    background-color: #e2e8f0;
+    border-radius: 50%;
+}
+
+/* --- Konten Utama & Footer --- */
+.main-content {
+    padding: 2rem;
+    flex-grow: 1;
+}
+footer {
+    text-align: center;
+    padding:  1.25rem 2rem;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+/* --- Komponen KARTU (PENTING) --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-card, .chart-container, .table-container, .notifications-panel, .form-card, .schedule-container {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.stat-card:hover, .chart-container:hover, .table-container:hover, .notifications-panel:hover, .form-card:hover, .schedule-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* --- Tombol (Button Styles) --- */
+.btn {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--transition-speed) ease;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-primary { background-color: var(--primary-accent); color: #fff; }
+.btn-primary:hover { background-color: var(--primary-accent-hover); }
+.btn-secondary { background-color: var(--card-bg); color: var(--primary-text); border: 1px solid var(--border-color); }
+.btn-secondary:hover { background-color: var(--secondary-accent-hover); }
+.btn-export { background-color: var(--success-accent); color: #fff; }
+.btn-export:hover { background-color: var(--success-accent-hover); }
+
+/* --- Halaman Dashboard --- */
+.main-content > section {
+    margin-bottom: 32px;
+}
+.stats-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.charts-grid { display: grid; gap: 1.5rem; grid-template-columns: 2fr 1fr; }
+.bottom-grid { display: grid; gap: 1.5rem; grid-template-columns: 2.5fr 1fr; }
+
+.table-container {
+    overflow-x: auto;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.card-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+.card-content p { color: var(--secondary-text); margin-bottom: 4px; }
+.card-content h3 { font-size: 28px; }
+
+.chart-header, .table-header, .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chart-filter .filter-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    background: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.chart-filter .filter-btn.active {
+    background-color: #edf2f7;
+    font-weight: 500;
+}
+
+.table-tools input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.guest-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.guest-table th, .guest-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guest-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--secondary-text);
+}
+
+.notification-list {
+    list-style: none;
+}
+
+.notification-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.notification-list li:last-child {
+    border-bottom: none;
+}
+
+.notification-list p {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.notification-list span {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+
+/* --- Halaman Daftar Tamu --- */
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.filter-bar { padding: 1rem; display: flex; gap: 1rem; margin-bottom: 1.5rem; background-color: #f7fafc; border-radius: 8px; border: 1px solid var(--border-color); flex-wrap: wrap; }
+.filter-bar input, .filter-bar select, .filter-bar button { flex-grow: 1; min-width: 150px; padding: 0.6rem; border: 1px solid var(--border-color); border-radius: 6px; }
+.entry-list { display: flex; flex-direction: column; gap: 16px; }
+.entry-card { background-color: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; transition: box-shadow 0.3s; }
+.entry-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+/* --- [BARU] Gaya Formulir (Input & Edit Tamu) --- */
+.form-row{
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.form-row .form-group {
+    flex: 1; /* Membuat setiap form-group di dalam row memiliki lebar yang sama */
+}
+
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-card p {
+    text-align: center;
+    color: var(--secondary-text);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-text);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="datetime-local"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="datetime-local"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+.form-group select {
+    /* Menghapus tampilan default browser */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Menambahkan panah kustom menggunakan SVG */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 1em;
+
+    /* Menyamakan gaya dengan input text lainnya */
+    width: 100%;
+    padding: 12px 40px 12px 15px; /* Beri ruang ekstra di kanan untuk panah */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--primary-text);
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* Gaya saat dropdown di-klik (focus) */
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* Gaya untuk placeholder (opsi pertama yang disabled) */
+.form-group select:invalid {
+    color: var(--secondary-text);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.file-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed);
+}
+
+.file-upload-area:hover {
+    border-color: var(--primary-accent);
+    background-color: #f7fafc;
+}
+
+.file-upload-area .file-icon {
+    margin-bottom: 15px;
+    color: var(--primary-accent);
+}
+
+.file-upload-area .file-text {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.file-upload-area .file-info {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#form-message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+#form-message.success {
+    color: var(--success-accent);
+}
+
+#form-message.error {
+    color: var(--danger-accent);
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
