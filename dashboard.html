@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Buku Tamu Perusahaan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logok.png" alt="Logo Perusahaan"> 
+        </div>
+        <nav class="sidebar-nav">
+            <div>
+                <a href="dashboard.html" class="active"><i data-feather="home"></i> Dashboard</a> 
+                <a href="index.html"><i data-feather="edit-3"></i> Input Tamu</a> 
+                <a href="daftar_tamu.html"><i data-feather="users"></i> Daftar Tamu</a> 
+                <a href="jadwal.html"><i data-feather="calendar"></i> Jadwal</a>
+            </div>
+            <a href="#logout" class="logout-link"><i data-feather="log-out"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">
+            <i data-feather="menu"></i>
+        </button>
+            <h1>Dashboard</h1>
+            <div class="header-actions">
+                <div class="user-profile">
+                    <div class="user-details">
+                        <span class="user-name">Nama User</span>
+                        <span class="realtime-clock" id="realtime-clock"></span>
+                    </div>
+                    <div class="user-icon-placeholder" aria-label="Profil Pengguna">
+                         <i data-feather="user"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="card-icon" style="background-color: #eaf2f8;"><i data-feather="users" style="color: #3498db;"></i></div>
+                    <div class="card-content">
+                        <p>Tamu Hari Ini</p>
+                        <h3 id="tamu-hari-ini">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-icon" style="background-color: #e8f5e9;"><i data-feather="calendar" style="color: #2ecc71;"></i></div>
+                    <div class="card-content">
+                        <p>Tamu Minggu Ini</p>
+                        <h3 id="tamu-minggu-ini">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-icon" style="background-color: #fff3e0;"><i data-feather="briefcase" style="color: #f39c12;"></i></div>
+                    <div class="card-content">
+                        <p>Sedang Berkunjung</p>
+                        <h3 id="sedang-berkunjung">0</h3>
+                    </div>
+                </div>
+                 <div class="stat-card">
+                    <div class="card-icon" style="background-color: #fbe9e7;"><i data-feather="check-circle" style="color: #e74c3c;"></i></div>
+                    <div class="card-content">
+                        <p>Kunjungan Selesai (Hari ini)</p>
+                        <h3 id="kunjungan-selesai-hari-ini">0</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-grid">
+                <div class="chart-container main-chart">
+                    <div class="chart-header">
+                        <h4>Grafik Kunjungan</h4>
+                        <div class="chart-filter">
+                            <button class="btn btn-secondary filter-btn active" id="filter-harian">Harian</button>
+                            <button class="btn btn-secondary filter-btn" id="filter-mingguan">Mingguan</button>
+                            <button class="btn btn-secondary filter-btn" id="filter-bulanan">Bulanan</button>
+                        </div>
+                    </div>
+                    <canvas id="visitTrendChart"></canvas>
+                </div>
+                <div class="chart-container side-chart">
+                     <div class="chart-header">
+                        <h4>Kategori Tamu</h4>
+                    </div>
+                    <canvas id="guestCategoryChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="bottom-grid">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h4>Daftar Tamu Terbaru</h4>
+                    </div>
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Instansi/Perusahaan</th>
+                                <th>Tujuan</th>
+                                <th>Waktu Kedatangan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tamu-terbaru-body">
+                           </tbody>
+                    </table>
+                </div>
+
+                <div class="notifications-panel">
+                    <div class="panel-header">
+                        <h4>Notifikasi Real-time</h4>
+                    </div>
+                    <ul class="notification-list" id="notifikasi-list">
+                        </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/dashboard_script.js"></script>
+    <script>
+        // Inisialisasi Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>

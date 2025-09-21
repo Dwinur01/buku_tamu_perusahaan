@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Tamu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logok.png" alt="Swantastic Pro Logo">
+        </div>
+        <nav class="sidebar-nav">
+            <div>
+                <a href="dashboard.html"><i data-feather="home"></i> Dashboard</a>
+                <a href="index.html" class="active"><i data-feather="edit-3"></i> Input Tamu</a>
+                <a href="daftar_tamu.html"><i data-feather="users"></i> Daftar Tamu</a>
+                <a href="jadwal.html"><i data-feather="calendar"></i> Jadwal</a>
+                <a href="https://book.swantastic.co.id/"><i data-feather="send"></i> Reservasi</a>
+            </div>
+            <a href="#logout" class="logout-link"><i data-feather="log-out"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">
+            <i data-feather="menu"></i>
+        </button>
+            <h1>Input Tamu</h1>
+            <div class="user-profile">
+                <div class="user-details">
+                    <span class="user-name">Nama User</span>
+                    <span class="realtime-clock" id="realtime-clock"></span>
+                </div>
+                <div class="user-icon-placeholder" aria-label="Profil Pengguna">
+                     <i data-feather="user"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="form-card">
+                    <h2>Tinggalkan Jejak Anda</h2>
+                    <p>Kami senang mendengar dari Anda. Bagikan pemikiran Anda dengan kami.</p>
+
+                    <form id="guestbook-form" action="php/process_entry.php" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="instansi">Instansi/Perusahaan</label>
+                                <input type="text" id="instansi" name="instansi" placeholder="Instansi atau Perusahaan Anda">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                             <div class="form-group">
+                                <label for="no_telepon">No. Telepon</label>
+                                <input type="tel" id="no_telepon" name="no_telepon" placeholder="Nomor Telepon Anda" pattern="[0-9]*">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Email Anda" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kategori">Kategori Kunjungan</label>
+                            <select id="kategori" name="kategori" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
+                                <option value="Bisnis">Bisnis</option>
+                                <option value="Pribadi">Pribadi</option>
+                                <option value="Pemerintahan">Pemerintahan</option>
+                                <option value="Sales Visit">Sales Visit</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="kategori-lainnya-wrapper" style="display:none;">
+                            <label for="kategori_lainnya">Tulis Kategori Anda</label>
+                            <input type="text" id="kategori_lainnya" name="kategori_lainnya" placeholder="Masukkan kategori kunjungan">
+                        </div>
+
+                        <div class="form-group" id="sales-proposal-upload" style="display:none;">
+                            <label for="proposal_pdf">Unggah Pricelist (PDF)</label>
+                            <div class="file-upload-area" id="file-upload-area">
+                                <input type="file" id="proposal_pdf" name="proposal_pdf" accept=".pdf" class="file-input-custom">
+                                <p class="file-text">Unggah file atau tarik dan lepas</p>
+                                <p class="file-info">PDF 2MB</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tujuan">Tujuan Kunjungan (Keperluan)</label>
+                            <textarea id="tujuan" name="tujuan" rows="4" placeholder="Jelaskan tujuan kunjungan Anda" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bertemu_dengan">Bertemu Dengan</label>
+                            <input type="text" id="bertemu_dengan" name="bertemu_dengan" placeholder="Nama orang yang akan ditemui" required>
+                        </div>
+
+                        <div class="form-row">
+                             <div class="form-group">
+                                <label for="waktu_mulai">Waktu Mulai Kunjungan</label>
+                                <input type="datetime-local" id="waktu_mulai" name="waktu_mulai" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="waktu_selesai">Waktu Selesai Kunjungan</label>
+                                <input type="datetime-local" id="waktu_selesai" name="waktu_selesai" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="photo">Foto</label>
+                            <div class="file-upload-area" id="file-upload-area">
+                                <input type="file" id="photo" name="photo[]" multiple accept="image/png, image/jpeg, image/gif">
+                                <div class="file-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                </div>
+                                <p class="file-text">Unggah file atau tarik dan lepas</p>
+                                <p class="file-info">PNG, JPG, GIF hingga 10MB</p>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-submit">Kirim Data</button>
+                    </form>
+                    <div id="form-message"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <nav class="footer-nav">
+                <a href="privacy-policy.html" aria-label="Kebijakan Privasi">Privacy Policy</a>
+                <a href="terms-of-service.html" aria-label="Ketentuan Layanan">Terms of Service</a>
+                <a href="contact.html" aria-label="Hubungi Kami">Contact Us</a>
+            </nav>
+            <p>&copy; 2025 Buku Tamu. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

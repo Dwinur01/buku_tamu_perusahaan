@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Tamu Hari Ini | Buku Tamu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .schedule-table th, .schedule-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+        .schedule-table thead {
+            background-color: #f7fafc;
+        }
+        .schedule-table th {
+            font-weight: 600;
+            color: var(--primary-text);
+        }
+        .schedule-table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-accent);
+            margin-top: 30px;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logok.png" alt="Swantastic Pro Logo">
+        </div>
+        <nav class="sidebar-nav">
+            <div>
+                <a href="dashboard.html"><i data-feather="home"></i> Dashboard</a>
+                <a href="index.html"><i data-feather="edit-3"></i> Input Tamu</a>
+                <a href="daftar_tamu.html"><i data-feather="users"></i> Daftar Tamu</a>
+                <a href="jadwal.html" class="active"><i data-feather="calendar"></i> Jadwal</a>
+            </div>
+            <a href="#logout" class="logout-link"><i data-feather="log-out"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">
+            <i data-feather="menu"></i>
+        </button>
+            <h1>Jadwal Tamu Hari Ini</h1>
+             <div class="user-profile">
+                <div class="user-details">
+                    <span class="user-name">Nama User</span>
+                    <span class="realtime-clock" id="realtime-clock"></span>
+                </div>
+                <div class="user-icon-placeholder" aria-label="Profil Pengguna">
+                     <i data-feather="user"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card">
+                <h2 class="section-title">Sedang Berkunjung</h2>
+                <div class="table-container">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Nama Tamu</th>
+                                <th>Keperluan</th>
+                                <th>Bertemu Dengan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sedang-berkunjung-body"></tbody>
+                    </table>
+                </div>
+
+                <h2 class="section-title">Akan Datang Hari Ini</h2>
+                <div class="table-container">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Nama Tamu</th>
+                                <th>Keperluan</th>
+                                <th>Bertemu Dengan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="akan-datang-body"></tbody>
+                    </table>
+                </div>
+
+                <h2 class="section-title">Kunjungan Selesai Hari Ini</h2>
+                <div class="table-container">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Nama Tamu</th>
+                                <th>Keperluan</th>
+                                <th>Bertemu Dengan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="telah-selesai-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <nav class="footer-nav">
+                <a href="privacy-policy.html" aria-label="Kebijakan Privasi">Privacy Policy</a>
+                <a href="terms-of-service.html" aria-label="Ketentuan Layanan">Terms of Service</a>
+                <a href="contact.html" aria-label="Hubungi Kami">Contact Us</a>
+            </nav>
+            <p>&copy; 2025 Buku Tamu. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+
+            // Fungsi untuk mengisi tabel dengan data
+            function populateTable(tbodyId, dataArray) {
+                const tbody = document.getElementById(tbodyId);
+                tbody.innerHTML = ''; // Kosongkan tabel dulu
+
+                if (dataArray.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px;">Tidak ada jadwal untuk hari ini.</td></tr>';
+                    return;
+                }
+
+                let rows = '';
+                dataArray.forEach(item => {
+                    rows += `
+                        <tr>
+                            <td>${item.waktu_formatted}</td>
+                            <td>${item.nama_tamu}</td>
+                            <td>${item.keperluan}</td>
+                            <td>${item.bertemu_dengan}</td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = rows;
+            }
+
+            // Fungsi utama untuk memuat semua jadwal
+            async function loadAllSchedules() {
+                try {
+                    const response = await fetch('php/fetch_schedule.php');
+                    const data = await response.json();
+
+                    // Panggil fungsi populateTable untuk setiap kategori
+                    populateTable('sedang-berkunjung-body', data.sedang_berkunjung);
+                    populateTable('akan-datang-body', data.akan_datang);
+                    populateTable('telah-selesai-body', data.telah_selesai);
+
+                } catch (error) {
+                    console.error('Gagal memuat jadwal:', error);
+                    // Tampilkan pesan error di semua tabel
+                    const errorMsg = '<tr><td colspan="4" style="text-align:center; padding: 20px;">Gagal memuat data.</td></tr>';
+                    document.getElementById('sedang-berkunjung-body').innerHTML = errorMsg;
+                    document.getElementById('akan-datang-body').innerHTML = errorMsg;
+                    document.getElementById('telah-selesai-body').innerHTML = errorMsg;
+                }
+            }
+            
+            // Muat data saat halaman dibuka dan segarkan setiap 1 menit (60000 ms)
+            loadAllSchedules();
+            setInterval(loadAllSchedules, 60000);
+        });
+    </script>
+</body>
+</html>

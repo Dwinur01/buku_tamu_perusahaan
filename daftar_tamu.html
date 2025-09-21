@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Tamu | Buku Tamu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        /* [BARU] Style untuk Kartu Tamu yang Lebih Detail */
+        .entry-card {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-accent); /* Aksen warna di kiri */
+            border-radius: 8px;
+            padding: 20px;
+            transition: box-shadow 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Jarak antar elemen di dalam kartu */
+        }
+        .entry-card:hover { 
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover); 
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .entry-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .entry-header h3 { font-size: 18px; margin-bottom: 2px; }
+        .entry-header .instansi { color: var(--secondary-text); font-size: 14px; }
+        
+        .status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-weight: 600;
+            text-transform: capitalize;
+            white-space: nowrap;
+        }
+        /* Warna status disesuaikan */
+        .status-sedang-berkunjung { background-color: #e8f5e9; color: #2ecc71; }
+        .status-selesai { background-color: #fbe9e7; color: #e74c3c; }
+        .status-menunggu-verifikasi { background-color: #fff3e0; color: #f39c12; }
+        .status-dikonfirmasi { background-color: #eaf2f8; color: #3498db; }
+        .status-dibatalkan { background-color: #eeeeee; color: #757575; }
+        .status-terjadwalkan { background-color: #e8eaf6; color: #3f51b5; }
+
+        .entry-body .tujuan-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .entry-body .tujuan-text {
+            font-size: 14px;
+            color: var(--primary-text);
+        }
+
+        .entry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        .entry-footer small { color: var(--secondary-text); font-size: 13px; }
+        .entry-actions { display: flex; gap: 15px; }
+        .action-btn { color: var(--secondary-text); }
+        .action-btn:hover { color: var(--primary-accent); }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logok.png" alt="Swantastic Pro Logo">
+        </div>
+        <nav class="sidebar-nav">
+            <div>
+                <a href="dashboard.html"><i data-feather="home"></i> Dashboard</a>
+                <a href="index.html"><i data-feather="edit-3"></i> Input Tamu</a>
+                <a href="daftar_tamu.html" class="active"><i data-feather="users"></i> Daftar Tamu</a>
+                <a href="jadwal.html"><i data-feather="calendar"></i> Jadwal</a>
+            </div>
+            <a href="#logout" class="logout-link"><i data-feather="log-out"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">
+            <i data-feather="menu"></i>
+        </button>
+             <h1>Daftar Tamu</h1>
+            <div class="user-profile">
+                <div class="user-details">
+                    <span class="user-name">Nama User</span>
+                    <span class="realtime-clock" id="realtime-clock"></span>
+                </div>
+                <div class="user-icon-placeholder" aria-label="Profil Pengguna">
+                     <i data-feather="user"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card">
+                <div class="dashboard-header" style="justify-content: flex-end;">
+                    <a href="php/export_excel.php" id="export-excel-btn" class="btn btn-export">
+                        <i data-feather="download"></i> Ekspor ke Excel
+                    </a>
+                </div>
+                <div class="filter-bar">
+                    <input type="text" id="search-input" placeholder="Cari Nama atau Instansi...">
+                    <input type="date" id="date-filter">
+                    <select id="status-filter">
+                        <option value="">Semua Status</option>
+                        <option value="Menunggu Verifikasi">Menunggu Verifikasi</option>
+                        <option value="Dikonfirmasi">Dikonfirmasi</option>
+                        <option value="Sedang Berkunjung">Sedang Berkunjung</option>
+                        <option value="Selesai">Selesai</option>
+                        <option value="Dibatalkan">Dibatalkan</option>
+                    </select>
+                    <button class="btn btn-primary" id="filter-btn">Filter</button>
+                </div>
+
+                <div class="entry-list" id="entry-list">
+                    </div>
+
+                <div class="pagination" id="pagination-controls"></div>
+            </div>
+        </main>
+        
+        <footer>
+            <nav class="footer-nav">
+                <a href="privacy-policy.html" aria-label="Kebijakan Privasi">Privacy Policy</a>
+                <a href="terms-of-service.html" aria-label="Ketentuan Layanan">Terms of Service</a>
+                <a href="contact.html" aria-label="Hubungi Kami">Contact Us</a>
+            </nav>
+            <p>&copy; 2025 Buku Tamu. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

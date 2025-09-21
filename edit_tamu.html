@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data Tamu | Buku Tamu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-cancel {
+            background-color: var(--secondary-text);
+            color: #fff;
+        }
+        .btn-cancel:hover {
+            background-color: var(--primary-text);
+        }
+        .section-title {
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/logok.png" alt="Swantastic Pro Logo">
+        </div>
+        <nav class="sidebar-nav">
+            <div>
+                <a href="dashboard.html"><i data-feather="home"></i> Dashboard</a>
+                <a href="index.html"><i data-feather="edit-3"></i> Input Tamu</a>
+                <a href="daftar_tamu.html" class="active"><i data-feather="users"></i> Daftar Tamu</a>
+                <a href="jadwal.html"><i data-feather="calendar"></i> Jadwal</a>
+            </div>
+            <a href="#logout" class="logout-link"><i data-feather="log-out"></i> Logout</a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">
+            <i data-feather="menu"></i>
+        </button>
+            <h1>Edit Data & Jadwal Tamu</h1>
+            <div class="header-actions">
+                <div class="user-profile">
+                    <div class="user-details">
+                        <span class="user-name">Nama User</span>
+                        <span class="realtime-clock" id="realtime-clock"></span>
+                    </div>
+                    <div class="user-icon-placeholder" aria-label="Profil Pengguna">
+                         <i data-feather="user"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="form-card">
+                    <h2>Perbarui Informasi Tamu dan Jadwal</h2>
+                    <p>Silakan ubah data yang diperlukan di bawah ini.</p>
+
+                    <form id="edit-guest-form" method="POST">
+                        <input type="hidden" id="guest_id" name="guest_id">
+
+                        <h3 class="section-title">Data Diri Tamu</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="instansi">Instansi/Perusahaan</label>
+                                <input type="text" id="instansi" name="instansi">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="no_telepon">No. Telepon</label>
+                                <input type="tel" id="no_telepon" name="no_telepon" placeholder="Nomor Telepon Tamu">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <h3 class="section-title">Detail Kunjungan & Jadwal</h3>
+                        <div class="form-group">
+                            <label for="kategori">Kategori Kunjungan</label>
+                            <select id="kategori" name="kategori" required>
+                                <option value="" disabled>Pilih Kategori</option>
+                                <option value="Bisnis">Bisnis</option>
+                                <option value="Pribadi">Pribadi</option>
+                                <option value="Pemerintahan">Pemerintahan</option>
+                                <option value="Sales Visit">Sales Visit</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="kategori-lainnya-wrapper" style="display:none;">
+                            <label for="kategori_lainnya">Tulis Kategori Anda</label>
+                            <input type="text" id="kategori_lainnya" name="kategori_lainnya" placeholder="Masukkan kategori kunjungan">
+                        </div>
+                        <div class="form-group">
+                            <label for="keperluan">Keperluan (Tujuan)</label>
+                            <textarea id="keperluan" name="keperluan" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bertemu_dengan">Bertemu Dengan</label>
+                            <input type="text" id="bertemu_dengan" name="bertemu_dengan" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="waktu_mulai">Waktu Mulai Kunjungan</label>
+                                <input type="datetime-local" id="waktu_mulai" name="waktu_mulai" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="waktu_selesai">Waktu Selesai Kunjungan</label>
+                                <input type="datetime-local" id="waktu_selesai" name="waktu_selesai" required>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <a href="daftar_tamu.html" class="btn btn-cancel">Batal</a>
+                        </div>
+                    </form>
+                    <div id="form-message"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Buku Tamu. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+
+            const form = document.getElementById('edit-guest-form');
+            const formMessage = document.getElementById('form-message');
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestId = urlParams.get('id');
+
+            const kategoriSelect = document.getElementById('kategori');
+            const kategoriLainnyaWrapper = document.getElementById('kategori-lainnya-wrapper');
+            const kategoriLainnyaInput = document.getElementById('kategori_lainnya');
+
+            if (!guestId) {
+                document.querySelector('.form-card').innerHTML = '<h2>Error: ID Tamu tidak ditemukan.</h2><p>Silakan kembali ke <a href="daftar_tamu.html">daftar tamu</a>.</p>';
+                return;
+            }
+            
+            document.getElementById('guest_id').value = guestId;
+
+            // Fungsi untuk menampilkan/menyembunyikan input kategori "Lainnya"
+            function handleKategoriChange() {
+                if (kategoriSelect.value === 'Lainnya') {
+                    kategoriLainnyaWrapper.style.display = 'block';
+                } else {
+                    kategoriLainnyaWrapper.style.display = 'none';
+                }
+            }
+
+            // Ambil data gabungan dari tamu dan jadwal
+            fetch(`php/get_entry_details.php?id=${guestId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const details = data.data;
+                        // Isi data tamu
+                        document.getElementById('name').value = details.name;
+                        document.getElementById('instansi').value = details.instansi;
+                        document.getElementById('no_telepon').value = details.no_telepon;
+                        document.getElementById('email').value = details.email;
+                        
+                        // Logika untuk mengisi data kategori
+                        const kategoriDb = details.kategori;
+                        const opsiStandar = Array.from(kategoriSelect.options).map(opt => opt.value);
+
+                        if (opsiStandar.includes(kategoriDb)) {
+                            kategoriSelect.value = kategoriDb;
+                        } else {
+                            kategoriSelect.value = 'Lainnya';
+                            kategoriLainnyaInput.value = kategoriDb;
+                        }
+                        handleKategoriChange(); // Panggil fungsi untuk menyesuaikan tampilan awal
+                        
+                        // Isi data jadwal
+                        document.getElementById('keperluan').value = details.keperluan;
+                        document.getElementById('bertemu_dengan').value = details.bertemu_dengan;
+                        
+                        // Format waktu
+                        if(details.waktu_mulai) {
+                            document.getElementById('waktu_mulai').value = details.waktu_mulai.replace(' ', 'T');
+                        }
+                        if(details.waktu_selesai) {
+                            document.getElementById('waktu_selesai').value = details.waktu_selesai.replace(' ', 'T');
+                        }
+                    } else {
+                        document.querySelector('.form-card').innerHTML = `<h2>Error: ${data.message}</h2>`;
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+
+            // Tambahkan event listener ke dropdown kategori
+            kategoriSelect.addEventListener('change', handleKategoriChange);
+
+            // Handle submit form
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch('php/update_entry.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('Data dan jadwal berhasil diperbarui!');
+                        window.location.href = 'daftar_tamu.html';
+                    } else {
+                        formMessage.textContent = 'Gagal memperbarui: ' + result.message;
+                        formMessage.className = 'error';
+                    }
+                } catch (error) {
+                    formMessage.textContent = 'Terjadi kesalahan koneksi.';
+                    formMessage.className = 'error';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
